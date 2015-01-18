@@ -1,0 +1,107 @@
+<label>Show the square:
+    <input type="checkbox" ng-model="mustShow" />
+</label>
+<br />
+<div ng-if="mustShow">show</div>
+<div ng-if="!mustShow">Not shown</div>
+
+
+<hr>
+
+<div class="col-md-12" >
+<!--    TODO How to change order?-->
+    <!--    <div ng-repeat="(listName, list) in models.lists | orderBy:'listName':true " class="col-md-6">-->
+    <div ng-repeat="(listName, list) in models.lists " class="col-md-6">
+
+
+        <div ng-if="listName=='advertisers'">
+            <h3>Available Advertisers</h3>
+            <div ng-repeat="adv_item in list">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 ng-if="listName=='advertisers'" class="panel-title"> {{adv_item.name}}, {{adv_item.id}} </h3>
+                    </div>
+                    <div class="panel-body padding-off">
+                        <ul dnd-list="adv_item.ad_account">
+                            <li ng-repeat="item in adv_item.ad_account | orderBy:'id'" dnd-draggable="item" dnd-moved="adv_item.ad_account.splice(adv_item.ad_account.indexOf(item), 1)" dnd-effect-allowed="move" dnd-selected="models.selected = item" ng-class="{'selected': models.selected === item}">
+                                <div class="inclDireListItem" item="{{item}}"></div>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div ng-if="listName=='ad_accounts'">
+            <h3>----TODO---</h3>
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 ng-if="listName=='ad_accounts'" class="panel-title">Available Ad Accounts</h3>
+                </div>
+                <div class="panel-body padding-off">
+                    <ul dnd-list="list">
+                        <li ng-repeat="item in list | orderBy:'id'" dnd-draggable="item" dnd-moved="list.splice(list.indexOf(item), 1)" dnd-effect-allowed="move" dnd-selected="models.selected = item" ng-class="{'selected': models.selected === item}">
+                            <div class="inclDireListItem" item="{{item}}"></div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
+</div>
+<!--
+
+<hr>
+
+<div class="col-md-6">
+    <div class="row">
+        <div ng-repeat="advertiser in models.lists.advertisers" class="col-md-12">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{advertiser.name}}, {{advertiser.id}}</h3>
+                </div>
+                <div class="panel-body padding-off">
+                    <ul dnd-list="advertiser.ad_account">
+
+                        <li ng-repeat="item in advertiser.ad_account | orderBy:'id'" dnd-draggable="item" dnd-moved="advertiser.ad_account.splice(advertiser.ad_account.indexOf(item), 1)" dnd-effect-allowed="move" dnd-selected="models.selected = item" ng-class="{'selected': models.selected === item}">
+
+                            <div class="inclDireListItem" item="{{item}}"></div>
+
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="col-md-6">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title"> TODO Ad_Acouts</h3>
+                </div>
+                <div class="panel-body padding-off">
+                    <ul dnd-list="models.lists.ad_accounts">
+
+                        <li ng-repeat="item in models.lists.ad_accounts | orderBy:'id'" dnd-draggable="item" dnd-moved="models.lists.ad_accounts.splice(models.lists.ad_accounts.indexOf(item), 1)" dnd-effect-allowed="move" dnd-selected="models.selected = item" ng-class="{'selected': models.selected === item}">
+
+                            <div class="inclDireListItem" item="{{item}}"></div>
+
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+-->

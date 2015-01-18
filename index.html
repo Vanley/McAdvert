@@ -17,61 +17,45 @@
     <link rel="stylesheet" href="css/style.css">
 
 
-
-    <title>McAdvert</title>
+    <title>Advertiser Connector</title>
 </head>
 
 <body>
-    
-    
 
     <div ng-app class="container" overflow="auto">
         <div ng-controller="mcAdvertControler as mcac" data-ng-init="init()">
-
-
-
-
-
             <div class="well well-lg">
+
                 <div class="page-header">
-                    <h1>McAdvertAlfa4</h1>
+                    <h1>Advertiser Connector</h1>
                 </div>
 
-                <div class="row">
+                <div class="mcAdvert row">
+                    <!--Include-->
+                    <div ng-include="'inclList.html'"></div>
 
-                   
-                    
-                    
-                    
-                    
-                <div class="simpleDemo row">
-
-                <div class="col-md-12">
-                    <div class="row">
-                        <div ng-repeat="(listName, list) in models.lists" class="col-md-6">
-                            <div class="panel panel-info">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title">{{listName}}</h3>
-                                </div>
-                                <div class="panel-body padding-off">
-                                    <ul dnd-list="list">
-                                        <li ng-repeat="item in list | orderBy:'id'" dnd-draggable="item" dnd-moved="list.splice(list.indexOf(item), 1)" dnd-effect-allowed="move" dnd-selected="models.selected = item" ng-class="{'selected': models.selected === item}">
-                                            {{item.id}}
-                                            <div class="bs-callout bs-callout-info">
-                                                <p class="bg-info">{{ item.fb_account_id }}</p>
-                                                <p class="bg-warning">daily: {{ item.fb_amount_spent }}{{ item.fb_currency }}, limit: {{ item.fb_daily_spent_limit }}{{ item.fb_currency }}</p>
-                                                <p class="list-group-item-text">Time: {{ item.fb_timezone_name }} ({{ item.fb_timezone_offset_hours_utc }})</p>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
-                
+
                 <hr>
+                <!--Buttons-->
+                <div class="pull-right">
+                    <button ng-click="clearJsonData()" class="btn btn-success">
+                        Apply
+                    </button>
+                    <button ng-click="loadJsonData()" class="btn btn-warning">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+            <!-- /Well -->
+          
+            <hr>
+<!--
+            <div class="bs-callout bs-callout-danger">
+                <p>{{ jsonData }}</p>
+            </div>
 
+            <div class="bs-callout bs-callout-success">
                 <div class="col-md-11 col-md-offset-1">
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -82,47 +66,10 @@
                         </div>
                     </div>
                 </div>
-
-            </div>
-
-                    
-                    
-                    
-                    
-
-                </div>
-                <!--/row -->
-
-                <div class="pull-right">
-                    <button ng-click="clearJsonData()" class="btn btn-success">
-                        Apply
-                    </button>
-                    <button ng-click="loadJsonData()" class="btn btn-warning">
-                        Cancel
-                    </button>
-                </div>
-            </div>
-            <!-- /well -->
-
-
-            
-            <hr>
-
-            <div class="bs-callout bs-callout-danger">
-                <p>{{ jsonData }}</p>
-
-            </div>
-            
-            <!--
-
-
-            <div class="bs-callout bs-callout-success">
-                <p>{{ modelAsJson }}</p>
             </div>
 -->
 
         </div>
-
     </div>
 </body>
 

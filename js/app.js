@@ -1,13 +1,26 @@
 /*global $:false */
 /*global jQuery:false */
 /*global angular:false */
+/*global console:false */
+
+var tmpscope = {}; //TODO delete
 
 var app = angular.module("mcAdvert", ['dndLists']);
 
+app.directive('inclDireListItem', function () {
+    return {
+        scope: {},
+        restrict: 'C',
+        link: function (scope, element, attrs) {
+            scope.list = attrs.list;
+            scope.item = angular.fromJson(attrs.item);
+        },
+        templateUrl: 'inclDireListItem.html'
+    };
+});
 
 
 app.controller("mcAdvertControler", mcAdvertControll);
-
 
 function mcAdvertControll($scope, $http) {
     $scope.jsonData = [];
@@ -17,7 +30,7 @@ function mcAdvertControll($scope, $http) {
     $scope.loadJsonData = function () {
 
         $http({
-            method: 'GET', //TODO czy powinien byc POST (bardziej bezpieczny)
+            method: 'GET', //TODO czy powinien byc POST (jako bardziej bezpieczny)
             url: 'data/data.json'
         })
             .success(function (data) {
@@ -31,35 +44,14 @@ function mcAdvertControll($scope, $http) {
                 console.log($scope.jsonData);
                 $scope.models = {
                     selected: null,
-                    lists: $scope.jsonData
-                    // lists: $scope.jsonData.ad_accounts
-                    /*lists: {
-                        "Available Advertisers": $scope.jsonData.advertisers,
-                        "Available Add Accounts": $scope.jsonData.ad_accounts
-                    }*/
-
-
+                    //lists: $scope.jsonData
+                    lists: {
+                        "advertisers": $scope.jsonData.advertisers,
+                        "ad_accounts": $scope.jsonData.ad_accounts
+                    }
                 };
+
                 console.log($scope.jsonData.ad_accounts);
-                // Generate initial model
-                //    for (var i = 1; i <= 3; ++i) {
-                //        $scope.models.lists.A.push({
-                //            label: "Item A" + i
-                //        });
-                //        $scope.models.lists.B.push({
-                //            label: "Item B" + i
-                //        });
-                //    }
-                // $scope.models.lists.A = angular.toJson($scope.temp);
-                //$scope.models = angular.toJson($scope.temp);
-                // $scope.models.lists.A = angular.toJson($scope.data);
-                // $scope.temp = angular.toJson($scope.data);
-
-
-
-
-                //______________________________________
-
 
             })
             .error(function (data, status) {
@@ -71,22 +63,16 @@ function mcAdvertControll($scope, $http) {
     $scope.clearJsonData = function () {
         $scope.temp = $scope.jsonData;
         $scope.jsonData = [];
+        $scope.models = {};
     };
 
-
+    $scope.$watchCollection('models.lists.ad_accounts', function (model) {
+        console.log($scope.models.lists.ad_accounts);
+    });
 
     // Model to JSON 
     $scope.$watch('models', function (model) {
-
-        console.log($scope.models.lists.ad_accounts);
-
-  //      $scope.models.lists.ad_accounts.sort(sort_by('id', true, parseInt));
-
-        // $scope.sortObj(model.lists.ad_accounts, "id");
-
         $scope.modelAsJson = angular.toJson(model, true);
-
-
     }, true);
 
 
@@ -106,13 +92,11 @@ function mcAdvertControll($scope, $http) {
             return a = key(a), b = key(b), reverse * ((a > b) - (b > a));
         };
     };
-    
-    
 
-
+    //  Initialization function
     var init = function () {
         $scope.loadJsonData();
-
+        tmpscope = $scope; //TODO delete
 
     };
     init();
@@ -124,7 +108,3 @@ function mcAdvertControll($scope, $http) {
 //http://www.w3schools.com/angular/angular_bootstrap.asp
 //
 
-
-//init functions
-//function init() {}
-//$(init);

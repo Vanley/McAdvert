@@ -1,7 +1,7 @@
 {
     "ad_accounts": [
         {
-            "id": "23456789012",
+            "id": "23456789012free",
             "fb_account_id": "12345678901",
             "fb_amount_spent": "200",
             "fb_daily_spent_limit": "201",
@@ -12,7 +12,7 @@
             "fb_timezone_offset_hours_utc": "+1"
         },
         {
-            "id": "12345678901",
+            "id": "12345678901free",
             "fb_account_id": "12345678901",
             "fb_amount_spent": "100",
             "fb_daily_spent_limit": "101",
@@ -23,7 +23,7 @@
             "fb_timezone_offset_hours_utc": "+0"
         },
         {
-            "id": "34567890123",
+            "id": "34567890123free",
             "fb_account_id": "12345678901",
             "fb_amount_spent": "300",
             "fb_daily_spent_limit": "301",
@@ -32,11 +32,6 @@
             "fb_business_name": "THREE THREE",
             "fb_timezone_name": "+ZONE3",
             "fb_timezone_offset_hours_utc": "+2"
-        }
-    ],
-    "cośtam": [
-        {
-            "id": "a8765 qwerty"
         }
     ],
     "advertisers": [
@@ -69,8 +64,37 @@
             ]
         },
         {
+            "id": "3123",
+            "name": "name3",
+            "ad_account": [
+                {
+                    "id": "323456789012",
+                    "fb_account_id": "312345678901",
+                    "fb_amount_spent": "3200",
+                    "fb_daily_spent_limit": "3201",
+                    "fb_currency": "$",
+                    "fb_name": "3Two",
+                    "fb_business_name": "3TWO TWO",
+                    "fb_timezone_name": "3+ZONE2",
+                    "fb_timezone_offset_hours_utc": "+1"
+                },
+                {
+                    "id": "334567890123",
+                    "fb_account_id": "312345678901",
+                    "fb_amount_spent": "3300",
+                    "fb_daily_spent_limit": "3301",
+                    "fb_currency": "PLN",
+                    "fb_name": "3Three",
+                    "fb_business_name": "3THREE THREE",
+                    "fb_timezone_name": "3+ZONE3",
+                    "fb_timezone_offset_hours_utc": "+2"
+                }
+            ]
+        },
+        {
             "id": "234",
-            "name": "name2"
+            "name": "name2",
+            "ad_account": []
         }
     ]
 }
