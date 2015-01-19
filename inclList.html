@@ -18,9 +18,9 @@ TODO COLOURS
                 </div>
                 <!--TODO focus on input after ng-click >> showEdit-->
                 <!--                        <input class="form-control" type="text" id="advertiser_name" ng-model="adv_item.name">-->
-                <input class="form-control" type="text" id="advertiser_name" ng-model="models.temporary[0].name" placeholder="Type Name Here...">
+                <input class="form-control" type="text" ng-model="models.temporary[0].name" placeholder="Type Name Here...">
                 <span class="input-group-btn">
-                    <button class="btn btn-success" type="button" ng-click="createAdvertiser()"><span>Create </span>  <span class="glyphicon glyphicon-plus"></span>
+                    <button class="btn btn-success" ng-model="button" ng-disabled="!models.temporary[0].name" ng-click="createAdvertiser()"><span>Create </span>  <span class="glyphicon glyphicon-plus"></span>
                 </button>
                 </span>
             </div>

@@ -69,8 +69,11 @@ function mcAdvertControll($scope, $http) {
     };
 
     $scope.createAdvertiser = function () {
+        console.log($scope.models)
+  //      $scope.models.temporary[0].id = Math.random()*1000;
         $scope.models.lists.aadvertisers.splice($scope.models.lists.aadvertisers.length, 0, $scope.models.temporary[0])
-        $scope.models.temporary.splice(0, 1, $scope.models.template[0]);
+        angular.copy($scope.models.template, $scope.models.temporary);
+ 
     };
 
     $scope.clearJsonData = function () {
@@ -82,13 +85,14 @@ function mcAdvertControll($scope, $http) {
     $scope.$watch('models', function (model) {
         $scope.modelAsJson = angular.toJson(model, true);
         if (angular.isDefined(model)) {
-            //         console.log(model.temporary[0]);
             if (model.temporary[0].ad_account.length > 0) {
-                if (model.temporary[0].name === "") {
+                console.log(model.temporary[0].ad_account);
+                if (model.temporary[0].name == "") {
                     model.temporary[0].name = model.temporary[0].ad_account[0].fb_name;
                 };
             };
         };
+       // console.log($scope.models.temporary[0]);
     }, true);
 
 
