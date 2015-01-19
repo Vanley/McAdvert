@@ -117,6 +117,10 @@
    margin: 0 !important;
 }
 
+#well{
+    padding-top: 10px;
+}
+
 /*
 #overlay {
     position: absolute;
@@ -134,3 +138,7 @@
     background:transparent;
 }
 */
+/*
+*[role="button"] {
+   style these a buttons w/o relying on a .button class 
+}*/

@@ -19,6 +19,31 @@ app.directive('inclDireListItem', function () {
     };
 });
 
+app.directive('resize', function ($window) {
+    return function (scope, element) {
+        var w = angular.element($window);
+        scope.getWindowDimensions = function () {
+         //   console.log(w[0].innerHeight);
+            return { 'h': w[0].innerHeight };
+        };
+        scope.$watch(scope.getWindowDimensions, function (newValue, oldValue) {
+            scope.windowHeight = newValue.h;
+            scope.windowWidth = newValue.w;
+
+            scope.style = function () {
+                return { 
+                    'height': (newValue.h - 100) + 'px',
+                    'width': (newValue.w - 100) + 'px' 
+                };
+            };
+
+        }, true);
+
+        w.bind('resize', function () {
+            scope.$apply();
+        });
+    };
+});
 
 app.controller("mcAdvertControler", mcAdvertControll);
 
@@ -63,15 +88,15 @@ function mcAdvertControll($scope, $http) {
 
     $scope.deleteAdvertiser = function (index) {
         angular.forEach($scope.models.lists.aadvertisers[index].ad_account, function (ad_account) {
-            $scope.models.lists.fad_accounts.splice($scope.models.lists.fad_accounts.length, 0, ad_account)
+            $scope.models.lists.fad_accounts.splice($scope.models.lists.fad_accounts.length, 0, ad_account);
         });
         $scope.models.lists.aadvertisers.splice(index, 1);
     };
 
     $scope.createAdvertiser = function () {
-        console.log($scope.models)
+        console.log($scope.models);
   //      $scope.models.temporary[0].id = Math.random()*1000;
-        $scope.models.lists.aadvertisers.splice($scope.models.lists.aadvertisers.length, 0, $scope.models.temporary[0])
+        $scope.models.lists.aadvertisers.splice($scope.models.lists.aadvertisers.length, 0, $scope.models.temporary[0]);
         angular.copy($scope.models.template, $scope.models.temporary);
  
     };
@@ -86,12 +111,12 @@ function mcAdvertControll($scope, $http) {
         $scope.modelAsJson = angular.toJson(model, true);
         if (angular.isDefined(model)) {
             if (model.temporary[0].ad_account.length > 0) {
-                console.log(model.temporary[0].ad_account);
-                if (model.temporary[0].name == "") {
+                //console.log(model.temporary[0].ad_account);
+                if (model.temporary[0].name === "") {
                     model.temporary[0].name = model.temporary[0].ad_account[0].fb_name;
-                };
-            };
-        };
+                }
+            }
+        }
        // console.log($scope.models.temporary[0]);
     }, true);
 

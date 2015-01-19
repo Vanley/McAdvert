@@ -21,16 +21,14 @@
 </head>
 
 <body>
-    
-    
+
     <div ng-app class="container" overflow="auto">
         <div ng-controller="mcAdvertControler as mcac" data-ng-init="init()">
-            <div class="well well-lg">
-
-                <div class="page-header">
-                    <h1>Advertiser Connector</h1>
-                </div>
-
+    
+            
+            window.height: {{windowHeight}}
+            <div class="well well-lg" id="well" ng-style="style()" resize overflow="auto">
+             
                 <div class="mcAdvert row">
                     <!--Include-->
                     <div ng-include="'inclList.html'"></div>
@@ -49,15 +47,15 @@
                 </div>
             </div>
             <!-- /Well -->
-          
+
             <hr>
-<!--
+            <!--
             <div class="bs-callout bs-callout-danger">
                 <p>{{ jsonData }}</p>
             </div>
 -->
 
-<!--
+            <!--
             <div class="bs-callout bs-callout-success">
                 <div class="col-md-11 col-md-offset-1">
                     <div class="panel panel-default">
