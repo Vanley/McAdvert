@@ -24,8 +24,6 @@ app.controller("mcAdvertControler", mcAdvertControll);
 
 function mcAdvertControll($scope, $http) {
     $scope.jsonData = [];
-    $scope.temp = [];
-
 
     $scope.loadJsonData = function () {
 
@@ -34,50 +32,67 @@ function mcAdvertControll($scope, $http) {
             url: 'data/data.json'
         })
             .success(function (data) {
-                $scope.temp = data;
                 $scope.jsonData = angular.fromJson(data);
 
-                //______________________________________
-
-
-
-                console.log($scope.jsonData);
+                //  console.log($scope.jsonData);
                 $scope.models = {
                     selected: null,
                     //lists: $scope.jsonData
+                    template: [{
+                        "id": "",
+                        "name": "",
+                        "ad_account": []
+                    }],
+                    temporary: [{
+                        "id": "",
+                        "name": "",
+                        "ad_account": []
+                    }],
                     lists: {
-                        "advertisers": $scope.jsonData.advertisers,
-                        "ad_accounts": $scope.jsonData.ad_accounts
+                        "aadvertisers": $scope.jsonData.advertisers,
+                        "fad_accounts": $scope.jsonData.ad_accounts
                     }
                 };
-
-                console.log($scope.jsonData.ad_accounts);
-
+                //    console.log($scope.jsonData.ad_accounts);
+                //console.log($scope.models);
             })
             .error(function (data, status) {
                 $scope.jsonData = "error";
             });
     };
 
-
-    $scope.clearJsonData = function () {
-        $scope.temp = $scope.jsonData;
-        $scope.jsonData = [];
-        $scope.models = {};
+    $scope.deleteAdvertiser = function (index) {
+        angular.forEach($scope.models.lists.aadvertisers[index].ad_account, function (ad_account) {
+            $scope.models.lists.fad_accounts.splice($scope.models.lists.fad_accounts.length, 0, ad_account)
+        });
+        $scope.models.lists.aadvertisers.splice(index, 1);
     };
 
-    $scope.$watchCollection('models.lists.ad_accounts', function (model) {
-        console.log($scope.models.lists.ad_accounts);
-    });
+    $scope.createAdvertiser = function () {
+        $scope.models.lists.aadvertisers.splice($scope.models.lists.aadvertisers.length, 0, $scope.models.temporary[0])
+        $scope.models.temporary.splice(0, 1, $scope.models.template[0]);
+    };
+
+    $scope.clearJsonData = function () {
+        $scope.jsonData = {};
+        $scope.models = {};
+    };
 
     // Model to JSON 
     $scope.$watch('models', function (model) {
         $scope.modelAsJson = angular.toJson(model, true);
+        if (angular.isDefined(model)) {
+            //         console.log(model.temporary[0]);
+            if (model.temporary[0].ad_account.length > 0) {
+                if (model.temporary[0].name === "") {
+                    model.temporary[0].name = model.temporary[0].ad_account[0].fb_name;
+                };
+            };
+        };
     }, true);
 
 
     var sort_by = function (field, reverse, primer) {
-
         var key = primer ?
             function (x) {
                 return primer(x[field]);
@@ -85,14 +100,11 @@ function mcAdvertControll($scope, $http) {
             function (x) {
                 return x[field];
             };
-
         reverse = [-1, 1][+!!reverse];
-
         return function (a, b) {
             return a = key(a), b = key(b), reverse * ((a > b) - (b > a));
         };
     };
-
     //  Initialization function
     var init = function () {
         $scope.loadJsonData();
@@ -102,9 +114,3 @@ function mcAdvertControll($scope, $http) {
     init();
 
 }
-
-//
-//form watch 
-//http://www.w3schools.com/angular/angular_bootstrap.asp
-//
-

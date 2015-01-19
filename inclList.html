@@ -1,107 +1,116 @@
-<label>Show the square:
-    <input type="checkbox" ng-model="mustShow" />
-</label>
-<br />
-<div ng-if="mustShow">show</div>
-<div ng-if="!mustShow">Not shown</div>
-
-
-<hr>
-
-<div class="col-md-12" >
-<!--    TODO How to change order?-->
-    <!--    <div ng-repeat="(listName, list) in models.lists | orderBy:'listName':true " class="col-md-6">-->
-    <div ng-repeat="(listName, list) in models.lists " class="col-md-6">
-
-
-        <div ng-if="listName=='advertisers'">
-            <h3>Available Advertisers</h3>
-            <div ng-repeat="adv_item in list">
-                <div class="panel panel-info">
-                    <div class="panel-heading">
-                        <h3 ng-if="listName=='advertisers'" class="panel-title"> {{adv_item.name}}, {{adv_item.id}} </h3>
-                    </div>
-                    <div class="panel-body padding-off">
-                        <ul dnd-list="adv_item.ad_account">
-                            <li ng-repeat="item in adv_item.ad_account | orderBy:'id'" dnd-draggable="item" dnd-moved="adv_item.ad_account.splice(adv_item.ad_account.indexOf(item), 1)" dnd-effect-allowed="move" dnd-selected="models.selected = item" ng-class="{'selected': models.selected === item}">
-                                <div class="inclDireListItem" item="{{item}}"></div>
-                            </li>
-                        </ul>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        <div ng-if="listName=='ad_accounts'">
-            <h3>----TODO---</h3>
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <h3 ng-if="listName=='ad_accounts'" class="panel-title">Available Ad Accounts</h3>
-                </div>
-                <div class="panel-body padding-off">
-                    <ul dnd-list="list">
-                        <li ng-repeat="item in list | orderBy:'id'" dnd-draggable="item" dnd-moved="list.splice(list.indexOf(item), 1)" dnd-effect-allowed="move" dnd-selected="models.selected = item" ng-class="{'selected': models.selected === item}">
-                            <div class="inclDireListItem" item="{{item}}"></div>
-                        </li>
-                    </ul>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-
-</div>
-</div>
 <!--
-
-<hr>
-
-<div class="col-md-6">
-    <div class="row">
-        <div ng-repeat="advertiser in models.lists.advertisers" class="col-md-12">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <h3 class="panel-title">{{advertiser.name}}, {{advertiser.id}}</h3>
-                </div>
-                <div class="panel-body padding-off">
-                    <ul dnd-list="advertiser.ad_account">
-
-                        <li ng-repeat="item in advertiser.ad_account | orderBy:'id'" dnd-draggable="item" dnd-moved="advertiser.ad_account.splice(advertiser.ad_account.indexOf(item), 1)" dnd-effect-allowed="move" dnd-selected="models.selected = item" ng-class="{'selected': models.selected === item}">
-
-                            <div class="inclDireListItem" item="{{item}}"></div>
-
-                        </li>
-                    </ul>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<div class="col-md-6">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <h3 class="panel-title"> TODO Ad_Acouts</h3>
-                </div>
-                <div class="panel-body padding-off">
-                    <ul dnd-list="models.lists.ad_accounts">
-
-                        <li ng-repeat="item in models.lists.ad_accounts | orderBy:'id'" dnd-draggable="item" dnd-moved="models.lists.ad_accounts.splice(models.lists.ad_accounts.indexOf(item), 1)" dnd-effect-allowed="move" dnd-selected="models.selected = item" ng-class="{'selected': models.selected === item}">
-
-                            <div class="inclDireListItem" item="{{item}}"></div>
-
-                        </li>
-                    </ul>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</div>
+TODO COLOURS
+            COLORURS #181818 -bg components #343434 -components #0088DB blue select/accent #f1f1f1 bg white #EAEBEC bg white components
 -->
+
+
+<div class="col-md-6">
+
+    <h3>----NEW---</h3>
+    <hr>
+    <div class="panel panel-info">
+        <div class="panel-heading nopadding">
+            <div class="input-group">
+                <span class="input-group-btn"><button class="btn btn-info disabled"><span class="glyphicon glyphicon-volume-down"></span>
+                </button>
+                </span>
+                <div class="input-group-addon"><span class="glyphicon glyphicon-font"></span>
+                </div>
+                <!--TODO focus on input after ng-click >> showEdit-->
+                <!--                        <input class="form-control" type="text" id="advertiser_name" ng-model="adv_item.name">-->
+                <input class="form-control" type="text" id="advertiser_name" ng-model="models.temporary[0].name" placeholder="Type Name Here...">
+                <span class="input-group-btn">
+                    <button class="btn btn-success" type="button" ng-click="createAdvertiser()"><span>Create </span>  <span class="glyphicon glyphicon-plus"></span>
+                </button>
+                </span>
+            </div>
+        </div>
+
+        <div class="panel-body padding-off">
+            <ul dnd-list="models.temporary[0].ad_account" class="nopadding">
+                <li ng-repeat="item in models.temporary[0].ad_account | orderBy:'id'" dnd-draggable="item" dnd-moved="models.temporary[0].ad_account.splice(models.temporary[0].ad_account.indexOf(item), 1)" dnd-effect-allowed="move" dnd-selected="models.selected = item" ng-class="{'selected': models.selected === item}">
+                    <div class="inclDireListItem" item="{{item}}"></div>
+                </li>
+                <li ng-if="models.temporary[0].ad_account == 0" class="text-center">
+                    <div>> <em>Drop Accounts here to start creating new Advertiser.</em> 
+                        < </div>
+                </li>
+            </ul>
+            </div>
+        </div>
+
+
+        <h3>Available Advertisers</h3>
+        <div class="input-group">
+            <span class="input-group-addon"> <span class="glyphicon glyphicon-search"></span>
+            </span>
+            <!--TODO search , name -done, inside (fb_name)   TODO             -->
+            <input class="form-control panel-title" type="text" placeholder="Search in Advertisers..." ng-model="searchTextInAdvertisers.name">
+        </div>
+        <hr>
+
+
+        <div ng-repeat="adv_item in models.lists.aadvertisers | orderBy:'name' | filter:searchTextInAdvertisers:strict">
+            <div class="panel panel-info bs-callout bs-callout-info padding-off">
+
+                <div class="panel-heading nopadding">
+                    <div ng-show="showEdit" class="input-group">
+                        <span class="input-group-btn"><button class="btn btn-info disabled"><span class="glyphicon glyphicon-volume-down"></span>
+                        </button>
+                        </span>
+                        <div class="input-group-addon"><span class="glyphicon glyphicon-font"></span>
+                        </div>
+                        <!--TODO focus on input after ng-click >> showEdit-->
+                        <input class="form-control" type="text" id="advertiser_name" ng-model="adv_item.name">
+                        <span class="input-group-btn">
+                            <button class="btn btn-warning" type="button" ng-click="deleteAdvertiser(models.lists.aadvertisers.indexOf(adv_item))"><span class="glyphicon glyphicon-trash"></span></span>
+                        <button class="btn btn-default" type="button" ng-click="showEdit = ! showEdit"><span class="glyphicon glyphicon-ok"></span></span>
+                        </button>
+                        </span>
+                    </div>
+
+                    <div ng-show="!showEdit" class="input-group">
+                        <span class="input-group-btn"><button class="btn btn-info disabled"><span class="glyphicon glyphicon-volume-down"></span>
+                        </button>
+                        </span>
+                        <span class="form-control"><strong>{{adv_item.name}}</strong></span>
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" ng-click="showEdit = ! showEdit"><span class="glyphicon glyphicon-edit"></span>
+                        </button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="panel-body nopadding">
+                    <ul dnd-list="adv_item.ad_account" class="nopadding">
+                        <li ng-repeat="item in adv_item.ad_account | orderBy:'id'" dnd-draggable="item" dnd-moved="adv_item.ad_account.splice(adv_item.ad_account.indexOf(item), 1)" dnd-effect-allowed="move" dnd-selected="models.selected = item" ng-class="{'selected': models.selected === item}">
+                            <div class="inclDireListItem" item="{{item}}"></div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <h3>Free Ad Accounts</h3>
+        <div class="input-group">
+            <span class="input-group-addon"> <span class="glyphicon glyphicon-search"></span>
+            </span>
+            <input class="form-control panel-title" type="text" placeholder="Search in Ad Accounts..." ng-model="searchTextInAdAccounts">
+        </div>
+        <hr>
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">Available Ad Accounts</h3>
+            </div>
+            <div class="panel-body padding-off">
+                <ul dnd-list="models.lists.fad_accounts">
+                    <li ng-repeat="item in models.lists.fad_accounts | orderBy:'id' | filter:searchTextInAdAccounts" dnd-draggable="item" dnd-moved="models.lists.fad_accounts.splice(list.indexOf(item), 1)" dnd-effect-allowed="move" dnd-selected="models.selected = item" ng-class="{'selected': models.selected === item}">
+                        <div class="inclDireListItem" item="{{item}}"></div>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
