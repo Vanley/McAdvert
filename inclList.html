@@ -12,7 +12,7 @@ todo modal
 -->
 
 
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-inverse nopadding">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -63,8 +63,7 @@ todo modal
 
 <div class="col-md-6">
 
-    <h3>----NEW---</h3>
-    <hr>
+    <h3>Create New Advertiser</h3>
     <div class="panel panel-info">
         <div class="panel-heading nopadding">
             <div class="input-group">
@@ -94,7 +93,8 @@ todo modal
             </ul>
         </div>
     </div>
-
+    
+    <hr>
 
     <h3>Available Advertisers</h3>
     <div class="input-group">
@@ -113,10 +113,8 @@ todo modal
             </ul>
         </div>
     <div ng-repeat="adv_item in models.lists.aadvertisers | orderBy:'name' | filter:searchTextInAdvertisers:strict">
-
-        
+     
         <div class="panel panel-info bs-callout bs-callout-info padding-off">
-
             <div class="panel-heading nopadding">
                 <div ng-show="showEdit" class="input-group">
                     <span class="input-group-btn"><button class="btn btn-info disabled"><span class="glyphicon glyphicon-volume-down"></span>
@@ -167,7 +165,7 @@ todo modal
         <input class="form-control panel-title" type="text" placeholder="Search in Ad Accounts..." ng-model="searchTextInAdAccounts">
     </div>
     <hr>
-    <div class="panel panel-info">
+    <div class="panel panel-info bs-callout bs-callout-info padding-off">
         <div class="panel-heading">
             <h3 class="panel-title">Available Ad Accounts</h3>
         </div>
