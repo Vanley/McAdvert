@@ -6,6 +6,8 @@
 .bs-callout {
     margin: 20px 0;
     padding: 15px 30px 15px 15px;
+    border: 0px;
+    border-top: 1px solid #eee;
     border-left: 5px solid #eee;
 }
 .bs-callout h4 {
@@ -32,6 +34,11 @@
     background-color: #f0f7fd;
     border-color: #d0e3f0;
 }
+.bs-callout-bionic {
+    background-color: #EAEBEC;
+    border-color: #0088DB;
+}
+0088DB
 /**
         
 
@@ -115,6 +122,12 @@
 .nopadding {
    padding: 0 !important;
    margin: 0 !important;
+}
+
+.bionic_color{
+/*    background-color:#EAEBEC;*/
+    color:#0088DB;
+    background-color:#0088DB;
 }
 
 #well{

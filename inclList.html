@@ -9,6 +9,13 @@ TODO ser uszka
 
 todo modal
 
+
+
+todo
+name    available advertiser
+search    name
+
+
 -->
 
 
@@ -28,10 +35,10 @@ todo modal
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#" ng-click="createAdvertiserFrmAdAcc()">1:1</a>
+                <li class="active"><a href="#" ng-click="createAdvertiserFrmAdAcc()">1:1</a>
                 </li>
-                <li class="active"><a href="#">Link </a>
-                </li>
+
+
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
@@ -93,7 +100,7 @@ todo modal
             </ul>
         </div>
     </div>
-    
+
     <hr>
 
     <h3>Available Advertisers</h3>
@@ -105,15 +112,17 @@ todo modal
     </div>
     <hr>
 
-<div ng-if="models.lists.aadvertisers == 0" class="panel-body nopadding">
-            <ul dnd-list="" class="nopadding">
-                <li class="text-center">
-                    <h5><small><em>No adverisers. Create one.</em></small></h5> 
-                </li>
-            </ul>
-        </div>
+
+    <div ng-if="models.lists.aadvertisers == 0" class="panel-body nopadding">
+        <ul dnd-list="models.lists.fad_accounts" class="nopadding">
+            <li class="text-center">
+                <h5><small><em>No adverisers. Create one.</em></small></h5> 
+            </li>
+        </ul>
+    </div>
+
     <div ng-repeat="adv_item in models.lists.aadvertisers | orderBy:'name' | filter:searchTextInAdvertisers:strict">
-     
+
         <div class="panel panel-info bs-callout bs-callout-info padding-off">
             <div class="panel-heading nopadding">
                 <div ng-show="showEdit" class="input-group">
@@ -126,7 +135,7 @@ todo modal
                     <input class="form-control" type="text" id="advertiser_name" ng-model="adv_item.name">
                     <span class="input-group-btn">
                             <button class="btn btn-warning" type="button" ng-click="deleteAdvertiser(models.lists.aadvertisers.indexOf(adv_item))"><span class="glyphicon glyphicon-trash"></span></span>
-                    <button class="btn btn-default" type="button" ng-click="showEdit = ! showEdit"><span class="glyphicon glyphicon-ok"></span></span>
+                    <button class="btn btn-success" type="button" ng-click="showEdit = ! showEdit"><span class="glyphicon glyphicon-ok"></span></span>
                     </button>
                     </span>
                 </div>
