@@ -70,7 +70,7 @@ function mcAdvertControll($scope, $http) {
                         "name": "",
                         "ad_account": []
                     }],
-                    temporary: [{
+                    newAdvertiser: [{
                         "id": "",
                         "name": "",
                         "ad_account": []
@@ -97,20 +97,17 @@ function mcAdvertControll($scope, $http) {
 
     $scope.createAdvertiser = function () {
         console.log($scope.models);
-        //      $scope.models.temporary[0].id = Math.random()*1000;
-        $scope.models.lists.aadvertisers.push($scope.models.temporary.shift());
-        //console.log($scope.models);
-        angular.copy($scope.models.template, $scope.models.temporary);
-        //console.log($scope.models);
+        $scope.models.lists.aadvertisers.push($scope.models.newAdvertiser.shift());
+        angular.copy($scope.models.template, $scope.models.newAdvertiser);
     };
 
     $scope.createAdvertiserFrmAdAcc = function () {
         angular.forEach($scope.models.lists.fad_accounts, function (ad_account) {
-            $scope.tttt = {};
-            angular.copy($scope.models.template[0], $scope.tttt);      
-            $scope.tttt.ad_account.push(ad_account);
-            $scope.tttt.name =  $scope.tttt.ad_account[0].fb_name;
-            $scope.models.lists.aadvertisers.push($scope.tttt);
+            $scope.tempCreateAdv = {};
+            angular.copy($scope.models.template[0], $scope.tempCreateAdv);      
+            $scope.tempCreateAdv.ad_account.push(ad_account);
+            $scope.tempCreateAdv.name =  $scope.tempCreateAdv.ad_account[0].fb_name;
+            $scope.models.lists.aadvertisers.push($scope.tempCreateAdv);
         });
         $scope.models.lists.fad_accounts = [];
     };
@@ -123,15 +120,15 @@ function mcAdvertControll($scope, $http) {
     // Model to JSON 
     $scope.$watch('models', function (model) {
         $scope.modelAsJson = angular.toJson(model, true);
-        if (angular.isDefined(model) && angular.isDefined(model.temporary[0])) {
-            if (model.temporary[0].ad_account.length > 0) {
-                //console.log(model.temporary[0].ad_account);
-                if (model.temporary[0].name === "") {
-                    model.temporary[0].name = model.temporary[0].ad_account[0].fb_name;
+        if (angular.isDefined(model) && angular.isDefined(model.newAdvertiser[0])) {
+            if (model.newAdvertiser[0].ad_account.length > 0) {
+                //console.log(model.newAdvertiser[0].ad_account);
+                if (model.newAdvertiser[0].name === "") {
+                    model.newAdvertiser[0].name = model.newAdvertiser[0].ad_account[0].fb_name;
                 }
             }
         }
-        // console.log($scope.models.temporary[0]);
+        // console.log($scope.models.newAdvertiser[0]);
     }, true);
 
 
