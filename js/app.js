@@ -23,17 +23,19 @@ app.directive('resize', function ($window) {
     return function (scope, element) {
         var w = angular.element($window);
         scope.getWindowDimensions = function () {
-         //   console.log(w[0].innerHeight);
-            return { 'h': w[0].innerHeight };
+            //   console.log(w[0].innerHeight);
+            return {
+                'h': w[0].innerHeight
+            };
         };
         scope.$watch(scope.getWindowDimensions, function (newValue, oldValue) {
             scope.windowHeight = newValue.h;
             scope.windowWidth = newValue.w;
 
             scope.style = function () {
-                return { 
+                return {
                     'height': (newValue.h - 100) + 'px',
-                    'width': (newValue.w - 100) + 'px' 
+                    'width': (newValue.w - 100) + 'px'
                 };
             };
 
@@ -95,10 +97,22 @@ function mcAdvertControll($scope, $http) {
 
     $scope.createAdvertiser = function () {
         console.log($scope.models);
-  //      $scope.models.temporary[0].id = Math.random()*1000;
-        $scope.models.lists.aadvertisers.splice($scope.models.lists.aadvertisers.length, 0, $scope.models.temporary[0]);
+        //      $scope.models.temporary[0].id = Math.random()*1000;
+        $scope.models.lists.aadvertisers.push($scope.models.temporary.shift());
+        //console.log($scope.models);
         angular.copy($scope.models.template, $scope.models.temporary);
- 
+        //console.log($scope.models);
+    };
+
+    $scope.createAdvertiserFrmAdAcc = function () {
+        angular.forEach($scope.models.lists.fad_accounts, function (ad_account) {
+            $scope.tttt = {};
+            angular.copy($scope.models.template[0], $scope.tttt);      
+            $scope.tttt.ad_account.push(ad_account);
+            $scope.tttt.name =  $scope.tttt.ad_account[0].fb_name;
+            $scope.models.lists.aadvertisers.push($scope.tttt);
+        });
+        $scope.models.lists.fad_accounts = [];
     };
 
     $scope.clearJsonData = function () {
@@ -109,7 +123,7 @@ function mcAdvertControll($scope, $http) {
     // Model to JSON 
     $scope.$watch('models', function (model) {
         $scope.modelAsJson = angular.toJson(model, true);
-        if (angular.isDefined(model)) {
+        if (angular.isDefined(model) && angular.isDefined(model.temporary[0])) {
             if (model.temporary[0].ad_account.length > 0) {
                 //console.log(model.temporary[0].ad_account);
                 if (model.temporary[0].name === "") {
@@ -117,7 +131,7 @@ function mcAdvertControll($scope, $http) {
                 }
             }
         }
-       // console.log($scope.models.temporary[0]);
+        // console.log($scope.models.temporary[0]);
     }, true);
 
 
