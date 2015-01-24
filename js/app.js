@@ -47,35 +47,41 @@ app.directive('resize', function ($window) {
     };
 });
 
-app.directive('focusMe', function($timeout) {
-  return {
-    scope: { trigger: '=focusMe' },
-    link: function(scope, element) {
-      scope.$watch('trigger', function(value) {
-        if(value === true) { 
-          //console.log('trigger',value);
-          $timeout(function() {
-            element[0].focus();
-            scope.trigger = false;
-          });
+app.directive('focusMe', function ($timeout) {
+    return {
+        scope: {
+            trigger: '=focusMe'
+        },
+        link: function (scope, element) {
+            scope.$watch('trigger', function (value) {
+                if (value === true) {
+                    //console.log('trigger',value);
+                    $timeout(function () {
+                        element[0].focus();
+                        scope.trigger = false;
+                    });
+                }
+            });
         }
-      });
-    }
-  };
+    };
 });
 
-app.directive('shadow', function() {
-  return {
-    scope: true,
-    link: function(scope, el, att) {
-      scope[att.shadow] = angular.copy(scope[att.shadow]);
-
-      scope.commit = function() {
-        scope.$parent[att.shadow] = angular.copy(scope[att.shadow]);
-      };
-    }
-  };
-});
+app.directive('focusout', ['$parse', function ($parse) {
+    return {
+        compile: function ($element, attr) {
+            var fn = $parse(attr.focusout);
+            return function handler(scope, element) {
+                element.on('focusout', function (event) {
+                    scope.$apply(function () {
+                        fn(scope, {
+                            $event: event
+                        });
+                    });
+                });
+            };
+        }
+    };
+}]);
 
 app.controller("mcAdvertControler", mcAdvertControll);
 
@@ -85,9 +91,9 @@ function mcAdvertControll($scope, $http) {
     $scope.loadJsonData = function () {
 
         $http({
-            method: 'GET', //TODO czy powinien byc POST (jako bardziej bezpieczny)
-            url: 'data/data.json'
-        })
+                method: 'GET', //TODO czy powinien byc POST (jako bardziej bezpieczny)
+                url: 'data/data.json'
+            })
             .success(function (data) {
                 $scope.jsonData = angular.fromJson(data);
 
@@ -134,9 +140,9 @@ function mcAdvertControll($scope, $http) {
     $scope.createAdvertiserFrmAdAcc = function () {
         angular.forEach($scope.models.lists.fad_accounts, function (ad_account) {
             $scope.tempCreateAdv = {};
-            angular.copy($scope.models.template[0], $scope.tempCreateAdv);      
+            angular.copy($scope.models.template[0], $scope.tempCreateAdv);
             $scope.tempCreateAdv.ad_account.push(ad_account);
-            $scope.tempCreateAdv.name =  $scope.tempCreateAdv.ad_account[0].fb_name;
+            $scope.tempCreateAdv.name = $scope.tempCreateAdv.ad_account[0].fb_name;
             $scope.models.lists.aadvertisers.push($scope.tempCreateAdv);
         });
         $scope.models.lists.fad_accounts = [];
