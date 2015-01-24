@@ -134,16 +134,12 @@ search    name
                     </span>
                     <span class="form-control"><strong>{{adv_item.name}}</strong></span>
                     <span class="input-group-btn">
-                            <button class="btn btn-warning" type="button" ng-click="deleteAdvertiser(models.lists.aadvertisers.indexOf(adv_item))">
-                            <span class="glyphicon glyphicon-trash"></span>
-                    </span>
-                    <span class="input-group-btn">
                             <button class="btn btn-default" type="button" ng-click="temp = adv_item.name; showEdit = ! showEdit; focusInput=true"><span class="glyphicon glyphicon-edit"></span>
                     </button>
                     </span>
                 </div>
 
-                <div ng-show="showEdit" class="input-group">
+                <form ng-submit="adv_item.name = temp; showEdit = ! showEdit" ng-show="showEdit" class="input-group">
                     <span class="input-group-btn"><button class="btn btn-info disabled"><span class="glyphicon glyphicon-volume-down"></span>
                     </button>
                     </span>
@@ -153,9 +149,11 @@ search    name
                     <input class="form-control" type="text" id="advertiser_name" ng-model="temp" focus-me="focusInput">
                     <!--                    <input class="form-control" type="text" id="advertiser_name" ng-model="temp" focus-me="focusInput" ng-blur="showEdit = ! showEdit">-->
                     <span class="input-group-btn">
+                    <button class="btn btn-warning" type="button" ng-click="deleteAdvertiser(models.lists.aadvertisers.indexOf(adv_item))"><span class="glyphicon glyphicon-trash"></span>
                     <button class="btn btn-success" type="button" ng-click="adv_item.name = temp; showEdit = ! showEdit"><span class="glyphicon glyphicon-ok"></span>
-                    </span>
-                </div>
+                        <button class="btn btn-danger" type="button" ng-click="temp = null; showEdit = ! showEdit"><span class="glyphicon glyphicon-remove"></span>
+                            </span>
+                </form>
             </div>
 
             <div class="panel-body nopadding">

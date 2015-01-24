@@ -2,7 +2,7 @@
 
 {{ item.id }}
 <div class="bs-callout bs-callout-info">
-    <p class="bg-info">{{ item.fb_account_id }}xxx</p>
+    <p class="bg-info">{{ item.fb_account_id }} ( {{ item.fb_name }} )</p>
     <p class="bg-warning">daily: {{ item.fb_amount_spent }}{{ item.fb_currency }}, limit: {{ item.fb_daily_spent_limit }}{{ item.fb_currency }}</p>
     <p class="list-group-item-text">Time: {{ item.fb_timezone_name }} ({{ item.fb_timezone_offset_hours_utc }})</p>
 </div>
