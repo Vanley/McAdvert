@@ -46,3 +46,36 @@ av.id
 falshpoint.advertisers as av
 
 falshpoint.facebook_accounts as fa
+
+
+<Focus on input>
+http://stackoverflow.com/questions/14833326/how-to-set-focus-on-input-field
+
+Original answer for 2., using an isolate scope:
+
+<button class="btn" ng-click="showForm=true; focusInput=true">show form and
+ focus input</button>
+<div ng-show="showForm">
+  <input type="text" focus-me="focusInput">
+  <button class="btn" ng-click="showForm=false">hide form</button>
+</div>
+
+app.directive('focusMe', function($timeout) {
+  return {
+    scope: { trigger: '=focusMe' },
+    link: function(scope, element) {
+      scope.$watch('trigger', function(value) {
+        if(value === true) { 
+          //console.log('trigger',value);
+          //$timeout(function() {
+            element[0].focus();
+            scope.trigger = false;
+          //});
+        }
+      });
+    }
+  };
+});
+
+Plunker -> http://plnkr.co/edit/gmaQCl?p=preview
+</focus on input>

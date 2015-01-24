@@ -19,6 +19,8 @@ search    name
 -->
 
 
+
+
 <nav class="navbar navbar-inverse nopadding">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -123,33 +125,37 @@ search    name
 
     <div ng-repeat="adv_item in models.lists.aadvertisers | orderBy:'name' | filter:searchTextInAdvertisers:strict">
 
-        <div class="panel panel-info bs-callout bs-callout-info padding-off">
+        <div class="panel panel-info bs-callout bs-callout-info padding-off" shadow="adv_item.name">
             <div class="panel-heading nopadding">
-                <div ng-show="showEdit" class="input-group">
-                    <span class="input-group-btn"><button class="btn btn-info disabled"><span class="glyphicon glyphicon-volume-down"></span>
-                    </button>
-                    </span>
-                    <div class="input-group-addon"><span class="glyphicon glyphicon-font"></span>
-                    </div>
-                    <!--TODO focus on input after ng-click >> showEdit-->
-                    <input class="form-control" type="text" id="advertiser_name" ng-model="adv_item.name">
-                    <span class="input-group-btn">
-                            <button class="btn btn-warning" type="button" ng-click="deleteAdvertiser(models.lists.aadvertisers.indexOf(adv_item))"><span class="glyphicon glyphicon-trash"></span></span>
-                    <button class="btn btn-success" type="button" ng-click="showEdit = ! showEdit"><span class="glyphicon glyphicon-ok"></span></span>
-                    </button>
-                    </span>
-                </div>
-
                 <div ng-show="!showEdit" class="input-group">
                     <span class="input-group-btn"><button class="btn btn-info disabled"><span class="glyphicon glyphicon-volume-down"></span>
                     </button>
                     </span>
                     <span class="form-control"><strong>{{adv_item.name}}</strong></span>
                     <span class="input-group-btn">
-                            <button class="btn btn-default" type="button" ng-click="showEdit = ! showEdit"><span class="glyphicon glyphicon-edit"></span>
+                            <button class="btn btn-default" type="button" ng-click="showEdit = ! showEdit; focusInput=true"><span class="glyphicon glyphicon-edit"></span>
                     </button>
                     </span>
                 </div>
+                
+                <div ng-show="showEdit" class="input-group" >
+                    <span class="input-group-btn"><button class="btn btn-info disabled"><span class="glyphicon glyphicon-volume-down"></span>
+                    </button>
+                    </span>
+                    <div class="input-group-addon"><span class="glyphicon glyphicon-font"></span>
+                    </div>
+                    <!--TODO focus on input after ng-click >> showEdit-->
+                    <input class="form-control" type="text" id="advertiser_name" ng-model="adv_item.name" focus-me="focusInput" ng-blur="showEdit = ! showEdit">
+                    <span class="input-group-btn">
+                            <button class="btn btn-warning" type="button" ng-click="deleteAdvertiser(models.lists.aadvertisers.indexOf(adv_item))"><span class="glyphicon glyphicon-trash"></span></span>
+                    <button class="btn btn-success" type="button" ng-click="showEdit = ! showEdit; commit()"><span class="glyphicon glyphicon-ok"></span></span>
+                    </button>
+                    </span>
+                </div>
+
+
+
+
             </div>
 
             <div class="panel-body nopadding">
