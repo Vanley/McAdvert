@@ -137,7 +137,7 @@ search    name
                     </span>
                 </div>
 
-                <form ng-submit="adv_item.name=temp; showEdit=! showEdit" ng-show="showEdit" class="input-group">
+                <form ng-submit="adv_item.name = temp_adv_item; showEdit=! showEdit" ng-show="showEdit" class="input-group">
                     <span class="input-group-btn"><button class="btn btn-info disabled"><span class="glyphicon glyphicon-volume-down"></span>
                     </button>
                     </span>
@@ -149,7 +149,7 @@ search    name
                     <span class="input-group-btn">
                     <button class="btn btn-warning" type="button" ng-click="deleteAdvertiser(models.lists.aadvertisers.indexOf(adv_item))"><span class="glyphicon glyphicon-trash"></span>
                     <button class="btn btn-success" type="button" ng-click="adv_item.name=temp_adv_item; showEdit= ! showEdit"><span class="glyphicon glyphicon-ok"></span>
-                        <button class="btn btn-danger" type="button" ng-click="temp_adv_item=null; showEdit= ! showEdit"><span class="glyphicon glyphicon-remove"></span>
+                        <button class="btn btn-danger" type="button" ng-click="showEdit= ! showEdit"><span class="glyphicon glyphicon-remove"></span>
                             </span>
                 </form>
             </div>
