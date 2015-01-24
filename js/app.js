@@ -66,23 +66,6 @@ app.directive('focusMe', function ($timeout) {
     };
 });
 
-app.directive('focusout', ['$parse', function ($parse) {
-    return {
-        compile: function ($element, attr) {
-            var fn = $parse(attr.focusout);
-            return function handler(scope, element) {
-                element.on('focusout', function (event) {
-                    scope.$apply(function () {
-                        fn(scope, {
-                            $event: event
-                        });
-                    });
-                });
-            };
-        }
-    };
-}]);
-
 app.controller("mcAdvertControler", mcAdvertControll);
 
 function mcAdvertControll($scope, $http) {
