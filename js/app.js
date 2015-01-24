@@ -38,9 +38,7 @@ app.directive('resize', function ($window) {
                     'width': (newValue.w - 100) + 'px'
                 };
             };
-
         }, true);
-
         w.bind('resize', function () {
             scope.$apply();
         });
@@ -70,9 +68,7 @@ app.controller("mcAdvertControler", mcAdvertControll);
 
 function mcAdvertControll($scope, $http) {
     $scope.jsonData = [];
-
     $scope.loadJsonData = function () {
-
         $http({
                 method: 'GET', //TODO czy powinien byc POST (jako bardziej bezpieczny)
                 url: 'data/data.json'
@@ -99,8 +95,6 @@ function mcAdvertControll($scope, $http) {
                         "fad_accounts": $scope.jsonData.ad_accounts
                     }
                 };
-                //    console.log($scope.jsonData.ad_accounts);
-                //console.log($scope.models);
             })
             .error(function (data, status) {
                 $scope.jsonData = "error";
@@ -120,7 +114,7 @@ function mcAdvertControll($scope, $http) {
         angular.copy($scope.models.template, $scope.models.newAdvertiser);
     };
 
-    $scope.createAdvertiserFrmAdAcc = function () {
+    $scope.createAdvertiserFromAdAcc = function () {
         angular.forEach($scope.models.lists.fad_accounts, function (ad_account) {
             $scope.tempCreateAdv = {};
             angular.copy($scope.models.template[0], $scope.tempCreateAdv);
@@ -132,8 +126,9 @@ function mcAdvertControll($scope, $http) {
     };
 
     $scope.clearJsonData = function () {
-        $scope.jsonData = {};
-        $scope.models = {};
+        $scope.models.lists.aadvertisers = [];
+        $scope.models.lists.fad_accounts = [];
+        $scope.models.newAdvertiser = [];
     };
 
     // Model to JSON 
@@ -147,28 +142,12 @@ function mcAdvertControll($scope, $http) {
                 }
             }
         }
-        // console.log($scope.models.newAdvertiser[0]);
     }, true);
 
-
-    var sort_by = function (field, reverse, primer) {
-        var key = primer ?
-            function (x) {
-                return primer(x[field]);
-            } :
-            function (x) {
-                return x[field];
-            };
-        reverse = [-1, 1][+!!reverse];
-        return function (a, b) {
-            return a = key(a), b = key(b), reverse * ((a > b) - (b > a));
-        };
-    };
     //  Initialization function
     var init = function () {
         $scope.loadJsonData();
         tmpscope = $scope; //TODO delete
-
     };
     init();
 

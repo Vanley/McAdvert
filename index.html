@@ -24,12 +24,12 @@
 
     <div ng-app class="container" overflow="auto">
         <div ng-controller="mcAdvertControler as mcac" data-ng-init="init()">
-    
-            
+
+
             window.height: {{windowHeight}}
             <div class="well well-lg" id="well" ng-style="style()">
-<!--            <div class="well well-lg" id="well" ng-style="style()" resize overflow="auto">-->
-             
+                <!--            <div class="well well-lg" id="well" ng-style="style()" resize overflow="auto">-->
+
                 <div class="mcAdvert row">
                     <!--Include-->
                     <div ng-include="'inclList.html'"></div>
@@ -40,10 +40,10 @@
                 <!--Buttons-->
                 <div class="pull-right">
                     <button ng-click="clearJsonData()" class="btn btn-success">
-                        Apply
+                        Clear
                     </button>
                     <button ng-click="loadJsonData()" class="btn btn-warning">
-                        Cancel
+                        Reload
                     </button>
                 </div>
             </div>
