@@ -10,6 +10,12 @@ TODO ser uszka
 
 scroll spy? in advertisers
 
+wewnatrz blura sprawdz gdzie autfocus
+
+
+http://stackoverflow.com/questions/6467139/jquery-toggle-expand-collapse-on-multiple-divs
+http://getbootstrap.com/javascript/#one
+http://angular-ui.github.io/bootstrap/
 -->
 
 
@@ -19,40 +25,47 @@ scroll spy? in advertisers
         <div class="navbar-header">
             <a class="navbar-brand">Advertiser Connector</a>
         </div>
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li ng-click="isActive= ! isActive" ng-class="{active: isActive}">
-                    <a data-toggle="collapse" href="#collapseCreateNewAdvertiser">
+        <!--        <div class="collapse navbar-collapse">-->
+        <ul class="nav navbar-nav">
+            <li ng-click="isActiveCreateNewAdvertiser= ! isActiveCreateNewAdvertiser" ng-class="{active: isActiveCreateNewAdvertiser}">
+                <a data-toggle="collapse" href="#collapseCreateNewAdvertiser">
                         Create New Advertiser
                         </a>
-                </li>
-            </ul>
+            </li>
+        </ul>
 
 
-            <ul class="nav navbar-nav navbar-right">
-                <li class="active"><a href="#" ng-click="createAdvertiserFromAdAcc()">1:1</a>
-                </li>
 
+        <ul class="nav navbar-nav navbar-right">
+            <li class="active"><a ng-click="createAdvertiserFromAdAcc()">1:1</a>
+            </li>
+            <li ng-click="isActiveSearch= ! isActiveSearch" ng-class="{active: isActiveSearch}">
 
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Action</a>
-                        </li>
-                        <li><a href="#">Another action</a>
-                        </li>
-                        <li><a href="#">Something else here</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a href="#">Separated link</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a href="#">One more separated link</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
+                <a data-toggle="collapse" href=#collapseSearchAvailableAdvertisers>
+                    <span class="glyphicon glyphicon-search"></span>
+
+                </a>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Action</a>
+                    </li>
+                    <li><a href="#">Another action</a>
+                    </li>
+                    <li><a href="#">Something else here</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li><a href="#">Separated link</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li><a href="#">One more separated link</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <!--        </div>-->
+        <!--        </div>-->
         <!-- /.navbar-collapse -->
     </div>
     <!-- /.container-fluid -->
@@ -140,7 +153,6 @@ scroll spy? in advertisers
                     <!--                    <input class="form-control" type="text" id="advertiser_name" ng-model="temp_adv_item" focus-me="focusInput" ng-blur="showEdit=! showEdit">-->
                     <span class="input-group-btn">
                     <button class="btn btn-warning" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#deleteAdvertiser{{$index}}"><span class="glyphicon glyphicon-trash"></span>
-                    <!--                    <button class="btn btn-warning" type="button" ng-click="deleteAdvertiser(models.lists.aadvertisers.indexOf(adv_item))"><span class="glyphicon glyphicon-trash"></span>-->
                     <button class="btn btn-success" type="button" ng-click="adv_item.name=temp_adv_item; showEdit= ! showEdit"><span class="glyphicon glyphicon-ok"></span>
                         <button class="btn btn-danger" type="button" ng-click="showEdit= ! showEdit"><span class="glyphicon glyphicon-remove"></span>
                             </span>
@@ -186,6 +198,7 @@ scroll spy? in advertisers
 
 <div class="col-md-6">
     <h3>Free Ad Accounts</h3>
+
     <div class="input-group">
         <span class="input-group-addon"> <span class="glyphicon glyphicon-search"></span>
         </span>

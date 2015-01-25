@@ -1,6 +1,5 @@
 /* Side notes for calling out things
 -------------------------------------------------- */
-
 /* Base styles (regardless of theme) */
 
 .bs-callout {
@@ -10,12 +9,15 @@
     border-top: 1px solid #eee;
     border-left: 5px solid #eee;
 }
+
 .bs-callout h4 {
     margin-top: 0;
 }
+
 .bs-callout p:last-child {
     margin-bottom: 0;
 }
+
 .bs-callout code,
 .bs-callout .highlight {
     background-color: #fff;
@@ -26,18 +28,22 @@
     background-color: #fcf2f2;
     border-color: #dFb5b4;
 }
+
 .bs-callout-warning {
     background-color: #fefbed;
     border-color: #f1e7bc;
 }
+
 .bs-callout-info {
     background-color: #f0f7fd;
     border-color: #d0e3f0;
 }
+
 .bs-callout-bionic {
     background-color: #EAEBEC;
     border-color: #0088DB;
 }
+
 0088DB
 /**
         
@@ -58,10 +64,8 @@
  */
 
 .mcAdvert ul[dnd-list] {
-    
     min-height: 42px;
     padding-left: 0px;
-
 }
 /**
  * The dndDraggingSource class will be applied to
@@ -88,7 +92,6 @@
     border-radius: 4px;
     border-width: medium;
 }
-
 /**
  * The dnd-lists's child elements currently MUST have
  * position: relative. Otherwise we can not determine
@@ -115,25 +118,39 @@
     color: #eee -50;
 }
 
-.padding-off{
+.padding-off {
     padding: 0;
 }
 
 .nopadding {
-   padding: 0 !important;
-   margin: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
 }
 
-.bionic_color{
-/*    background-color:#EAEBEC;*/
-    color:#0088DB;
-    background-color:#0088DB;
+.bionic_color {
+    /*    background-color:#EAEBEC;*/
+    
+    color: #0088DB;
+    background-color: #0088DB;
 }
 
-#well{
+#well {
     padding-top: 10px;
 }
 
+.collapsable {
+    display: inline-block;
+    overflow: hidden;
+    height: 0;
+    transition: height 1s;
+    -webkit-transition: height 1s;
+    -moz-transition: height 1s;
+    -o-transition: height 1s;
+}
+
+.collapsable.showMe {
+    height: 140px;
+}
 /*
 #overlay {
     position: absolute;
