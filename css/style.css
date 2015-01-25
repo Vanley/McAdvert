@@ -137,20 +137,6 @@
 #well {
     padding-top: 10px;
 }
-
-.collapsable {
-    display: inline-block;
-    overflow: hidden;
-    height: 0;
-    transition: height 1s;
-    -webkit-transition: height 1s;
-    -moz-transition: height 1s;
-    -o-transition: height 1s;
-}
-
-.collapsable.showMe {
-    height: 140px;
-}
 /*
 #overlay {
     position: absolute;
