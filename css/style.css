@@ -127,6 +127,10 @@
     margin: 0 !important;
 }
 
+.nopaddingTop {
+    padding-top: 0px !important;
+}
+
 .bionic_color {
     /*    background-color:#EAEBEC;*/
     
@@ -134,8 +138,50 @@
     background-color: #0088DB;
 }
 
-#well {
-    padding-top: 10px;
+#navbar {
+    margin-top: 10px;
+}
+
+.container {
+    margin-top: 20px;
+}
+
+.collapsable {
+    display: inline-block;
+    overflow: hidden;
+    height: 0;
+    transition: height 1s;
+    -webkit-transition: height 1s;
+    -moz-transition: height 1s;
+    -o-transition: height 1s;
+}
+
+.collapsable.showMe {
+    height: 100px;
+}
+
+.animate-enter,
+.animate-leave {
+    -webkit-transition: height 1s;
+    -moz-transition: height 1s;
+    -o-transition: height 1s;
+    transition: height 1s;
+    position: relative;
+    display: block;
+}
+
+.animate-enter.animate-enter-active,
+.animate-leave {
+    opacity: 1;
+    top: 0;
+    height: 30px;
+}
+
+.animate-leave.animate-leave-active,
+.animate-enter {
+    opacity: 0;
+    top: -50px;
+    height: 0px;
 }
 /*
 #overlay {

@@ -3,29 +3,30 @@ TODO COLOURS
             COLORURS #181818 -bg components #343434 -components #0088DB blue select/accent #f1f1f1 bg white #EAEBEC bg white components
 
 TODO SCROLL
+na calosci well = ok
+na tabelach = wylicz rozmiar
 
-TODO ser uszka
+TODO chowane w jednym przycisku
 
-? focus lostfocus problem
-
-scroll spy? in advertisers
-
+focus lost focus out od boundaries
 wewnatrz blura sprawdz gdzie autfocus
 
+scroll spy? in advertisers = low priority
 
 http://stackoverflow.com/questions/6467139/jquery-toggle-expand-collapse-on-multiple-divs
 http://getbootstrap.com/javascript/#one
 http://angular-ui.github.io/bootstrap/
+
+if search has no results add comment that there is no results
 -->
 
 
-<nav class="navbar navbar-inverse nopadding">
+<nav class="navbar navbar-inverse" id="navbar">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <a class="navbar-brand">Advertiser Connector</a>
         </div>
-        <!--        <div class="collapse navbar-collapse">-->
         <ul class="nav navbar-nav">
             <li ng-click="isActiveCreateNewAdvertiser= ! isActiveCreateNewAdvertiser" ng-class="{active: isActiveCreateNewAdvertiser}">
                 <a data-toggle="collapse" href="#collapseCreateNewAdvertiser">
@@ -40,10 +41,9 @@ http://angular-ui.github.io/bootstrap/
             <li class="active"><a ng-click="createAdvertiserFromAdAcc()">1:1</a>
             </li>
             <li ng-click="isActiveSearch= ! isActiveSearch" ng-class="{active: isActiveSearch}">
-
+                <!--      TODO jestes tutaj-->
                 <a data-toggle="collapse" href=#collapseSearchAvailableAdvertisers>
                     <span class="glyphicon glyphicon-search"></span>
-
                 </a>
             </li>
             <li class="dropdown">
@@ -82,115 +82,116 @@ http://angular-ui.github.io/bootstrap/
         <input class="form-control panel-title" type="text" placeholder="Search in Advertisers..." ng-model="searchTextInAdvertisers.name">
     </div>
     <hr>
-
-    <div class="collapse" id="collapseCreateNewAdvertiser">
-        <!--    <h3>Create New Advertiser</h3>-->
-        <div class="panel panel-info">
-            <div class="panel-heading nopadding">
-                <div class="input-group">
-                    <span class="input-group-btn"><button class="btn btn-info disabled"><span class="glyphicon glyphicon-volume-down"></span>
-                    </button>
-                    </span>
-                    <div class="input-group-addon"><span class="glyphicon glyphicon-font"></span>
-                    </div>
-                    <!--TODO focus on input after ng-click >> showEdit-->
-                    <!--                        <input class="form-control" type="text" id="advertiser_name" ng-model="adv_item.name">-->
-                    <input class="form-control" type="text" ng-model="models.newAdvertiser[0].name" placeholder="Type Name Here...">
-                    <span class="input-group-btn">
+    <div ng-style="styleScrollHighOfDiv()">
+        <div class="collapse" id="collapseCreateNewAdvertiser">
+            <!--    <h3>Create New Advertiser</h3>-->
+            <div class="panel panel-info">
+                <div class="panel-heading nopadding">
+                    <div class="input-group">
+                        <span class="input-group-btn"><button class="btn btn-info disabled"><span class="glyphicon glyphicon-volume-down"></span>
+                        </button>
+                        </span>
+                        <div class="input-group-addon"><span class="glyphicon glyphicon-font"></span>
+                        </div>
+                        <!--TODO focus on input after ng-click >> showEdit-->
+                        <!--                        <input class="form-control" type="text" id="advertiser_name" ng-model="adv_item.name">-->
+                        <input class="form-control" type="text" ng-model="models.newAdvertiser[0].name" placeholder="Type Name Here...">
+                        <span class="input-group-btn">
                     <button class="btn btn-success" ng-model="button" ng-disabled="!models.newAdvertiser[0].name" ng-click="createAdvertiser()"><span>Create </span> <span class="glyphicon glyphicon-plus"></span>
-                    </button>
-                    </span>
+                        </button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="panel-body padding-off">
+                    <ul dnd-list="models.newAdvertiser[0].ad_account" class="nopadding">
+                        <li ng-repeat="item in models.newAdvertiser[0].ad_account | orderBy: 'id'" dnd-draggable="item" dnd-moved="models.newAdvertiser[0].ad_account.splice(models.newAdvertiser[0].ad_account.indexOf(item), 1)" dnd-effect-allowed="move" dnd-selected="models.selected=item" ng-class="{ 'selected': models.selected===item}">
+                            <div class="inclDireListItem" item="{{item}}"></div>
+                        </li>
+                        <li ng-if="models.newAdvertiser[0].ad_account==0" class="text-center">
+                            <h5><small><em>Drop Accounts here to start creating new Advertiser.</em></small></h5>
+                        </li>
+                    </ul>
                 </div>
             </div>
-
-            <div class="panel-body padding-off">
-                <ul dnd-list="models.newAdvertiser[0].ad_account" class="nopadding">
-                    <li ng-repeat="item in models.newAdvertiser[0].ad_account | orderBy: 'id'" dnd-draggable="item" dnd-moved="models.newAdvertiser[0].ad_account.splice(models.newAdvertiser[0].ad_account.indexOf(item), 1)" dnd-effect-allowed="move" dnd-selected="models.selected=item" ng-class="{ 'selected': models.selected===item}">
-                        <div class="inclDireListItem" item="{{item}}"></div>
-                    </li>
-                    <li ng-if="models.newAdvertiser[0].ad_account==0" class="text-center">
-                        <h5><small><em>Drop Accounts here to start creating new Advertiser.</em></small></h5>
-                    </li>
-                </ul>
-            </div>
+            <hr>
         </div>
-        <hr>
-    </div>
 
 
-    <div ng-if="models.lists.aadvertisers==0" class="panel-body nopadding">
-        <ul dnd-list="models.lists.fad_accounts" class="nopadding">
-            <li class="text-center">
-                <h5><small><em>No adverisers. Create one.</em></small></h5>
-            </li>
-        </ul>
-    </div>
+        <div ng-if="models.lists.aadvertisers==0" class="panel-body nopadding">
+            <ul dnd-list="models.lists.fad_accounts" class="nopadding">
+                <li class="text-center">
+                    <h5><small><em>No adverisers. Create one.</em></small></h5>
+                </li>
+            </ul>
+        </div>
 
 
-    <div ng-repeat="adv_item in models.lists.aadvertisers | orderBy: 'name' | filter:searchTextInAdvertisers:strict">
+        <div ng-repeat="adv_item in models.lists.aadvertisers | orderBy: 'name' | filter:searchTextInAdvertisers:strict">
 
-        <div class="panel panel-info bs-callout bs-callout-info padding-off">
-            <div class="panel-heading nopadding">
-                <div ng-show="!showEdit" class="input-group">
-                    <span class="input-group-btn"><button class="btn btn-info disabled"><span class="glyphicon glyphicon-volume-down"></span>
-                    </button>
-                    </span>
-                    <span class="form-control"><strong>{{adv_item.name}}</strong></span>
-                    <span class="input-group-btn">
+            <div class="panel panel-info bs-callout bs-callout-info padding-off">
+                <div class="panel-heading nopadding">
+                    <div ng-show="!showEdit" class="input-group">
+                        <span class="input-group-btn"><button class="btn btn-info disabled"><span class="glyphicon glyphicon-volume-down"></span>
+                        </button>
+                        </span>
+                        <span class="form-control"><strong>{{adv_item.name}}</strong></span>
+                        <span class="input-group-btn">
                             <button class="btn btn-default" type="button" ng-click="temp_adv_item=adv_item.name; showEdit=! showEdit; focusInput=true"><span class="glyphicon glyphicon-edit"></span>
-                    </button>
-                    </span>
-                </div>
-
-                <form ng-submit="adv_item.name = temp_adv_item; showEdit=! showEdit" ng-show="showEdit" class="input-group">
-                    <span class="input-group-btn"><button class="btn btn-info disabled"><span class="glyphicon glyphicon-volume-down"></span>
-                    </button>
-                    </span>
-                    <div class="input-group-addon"><span class="glyphicon glyphicon-font"></span>
+                        </button>
+                        </span>
                     </div>
-                    <!--TODO focus on input after ng-click >> showEdit-->
-                    <input class="form-control" type="text" id="advertiser_name" ng-model="temp_adv_item" focus-me="focusInput">
-                    <!--                    <input class="form-control" type="text" id="advertiser_name" ng-model="temp_adv_item" focus-me="focusInput" ng-blur="showEdit=! showEdit">-->
-                    <span class="input-group-btn">
+
+                    <form ng-submit="adv_item.name = temp_adv_item; showEdit=! showEdit" ng-show="showEdit" class="input-group">
+                        <span class="input-group-btn"><button class="btn btn-info disabled"><span class="glyphicon glyphicon-volume-down"></span>
+                        </button>
+                        </span>
+                        <div class="input-group-addon"><span class="glyphicon glyphicon-font"></span>
+                        </div>
+                        <!--TODO focus on input after ng-click >> showEdit-->
+                        <input class="form-control" type="text" id="advertiser_name" ng-model="temp_adv_item" focus-me="focusInput">
+                        <!--                    <input class="form-control" type="text" id="advertiser_name" ng-model="temp_adv_item" focus-me="focusInput" ng-blur="showEdit=! showEdit">-->
+                        <span class="input-group-btn">
                     <button class="btn btn-warning" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#deleteAdvertiser{{$index}}"><span class="glyphicon glyphicon-trash"></span>
-                    <button class="btn btn-success" type="button" ng-click="adv_item.name=temp_adv_item; showEdit= ! showEdit"><span class="glyphicon glyphicon-ok"></span>
-                        <button class="btn btn-danger" type="button" ng-click="showEdit= ! showEdit"><span class="glyphicon glyphicon-remove"></span>
-                            </span>
-                </form>
-            </div>
+                        <button class="btn btn-success" type="button" ng-click="adv_item.name=temp_adv_item; showEdit= ! showEdit"><span class="glyphicon glyphicon-ok"></span>
+                            <button class="btn btn-danger" type="button" ng-click="showEdit= ! showEdit"><span class="glyphicon glyphicon-remove"></span>
+                                </span>
+                    </form>
+                </div>
 
 
-            <!-- Modal -->
-            <div class="modal fade" id="deleteAdvertiser{{$index}}" tabindex="-1" role="dialog">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                            </button>
-                            <h4 class="modal-title">Do you want to delete advertiser?</h4>
-                        </div>
-                        <div class="modal-body">
-                            Confirm advertiser remove?
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                            <button type="button" class="btn btn-danger" ng-click="deleteAdvertiser(models.lists.aadvertisers.indexOf(adv_item))">Remove</button>
+                <!-- Modal -->
+                <div class="modal fade" id="deleteAdvertiser{{$index}}" tabindex="-1" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                                </button>
+                                <h4 class="modal-title">Do you want to delete advertiser?</h4>
+                            </div>
+                            <div class="modal-body">
+                                Confirm advertiser remove?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-danger" ng-click="deleteAdvertiser(models.lists.aadvertisers.indexOf(adv_item))">Remove</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
 
 
-            <div class="panel-body nopadding">
-                <ul dnd-list="adv_item.ad_account" class="nopadding">
-                    <li ng-repeat="item in adv_item.ad_account | orderBy: 'id'" dnd-draggable="item" dnd-moved="adv_item.ad_account.splice(adv_item.ad_account.indexOf(item), 1)" dnd-effect-allowed="move" dnd-selected="models.selected=item" ng-class="{ 'selected': models.selected===item}">
-                        <div class="inclDireListItem" item="{{item}}"></div>
-                    </li>
-                    <li ng-if="adv_item.ad_account==0" class="text-center">
-                        <h5><small><em>No ad accounts assigned.</em></small></h5>
-                    </li>
-                </ul>
+                <div class="panel-body nopadding">
+                    <ul dnd-list="adv_item.ad_account" class="nopadding">
+                        <li ng-repeat="item in adv_item.ad_account | orderBy: 'id'" dnd-draggable="item" dnd-moved="adv_item.ad_account.splice(adv_item.ad_account.indexOf(item), 1)" dnd-effect-allowed="move" dnd-selected="models.selected=item" ng-class="{ 'selected': models.selected===item}">
+                            <div class="inclDireListItem" item="{{item}}"></div>
+                        </li>
+                        <li ng-if="adv_item.ad_account==0" class="text-center">
+                            <h5><small><em>No ad accounts assigned.</em></small></h5>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
@@ -198,27 +199,31 @@ http://angular-ui.github.io/bootstrap/
 
 <div class="col-md-6">
     <h3>Free Ad Accounts</h3>
-
-    <div class="input-group">
-        <span class="input-group-addon"> <span class="glyphicon glyphicon-search"></span>
-        </span>
-        <input class="form-control panel-title" type="text" placeholder="Search in Ad Accounts..." ng-model="searchTextInAdAccounts">
+    <div ng-animate="'animate'" ng-view=" isActiveSearch " ng-class=" 'animate' ">
+        <!--    <div ng-animate="'animate'" ng-view class="collapsable" ng-class="{ showMe: isActiveSearch }">-->
+        <div class="input-group">
+            <span class="input-group-addon"> <span class="glyphicon glyphicon-search"></span>
+            </span>
+            <input class="form-control panel-title" type="text" placeholder="Search in Ad Accounts..." ng-model="searchTextInAdAccounts">
+        </div>
     </div>
     <hr>
-    <div class="panel panel-info bs-callout bs-callout-info padding-off">
-        <div class="panel-heading">
-            <h3 class="panel-title">Available Ad Accounts</h3>
-        </div>
-        <div class="panel-body padding-off">
-            <ul dnd-list="models.lists.fad_accounts" class="nopadding">
-                <li ng-repeat="item in models.lists.fad_accounts | orderBy: 'id' | filter:searchTextInAdAccounts" dnd-draggable="item" dnd-moved="models.lists.fad_accounts.splice(list.indexOf(item), 1)" dnd-effect-allowed="move" dnd-selected="models.selected=item" ng-class="{ 'selected': models.selected===item}">
-                    <div class="inclDireListItem" item="{{item}}"></div>
-                </li>
-                <li ng-if="models.lists.fad_accounts==0" class="text-center">
-                    <h5><small><em>Great! All ad accounts assigned.</em></small></h5>
-                </li>
-            </ul>
-        </div>
+    <div ng-style="styleScrollHighOfDiv()">
+        <div class="panel panel-info bs-callout bs-callout-info padding-off">
+            <div class="panel-heading">
+                <h3 class="panel-title">Available Ad Accounts</h3>
+            </div>
+            <div class="panel-body padding-off">
+                <ul dnd-list="models.lists.fad_accounts" class="nopadding">
+                    <li ng-repeat="item in models.lists.fad_accounts | orderBy: 'id' | filter:searchTextInAdAccounts" dnd-draggable="item" dnd-moved="models.lists.fad_accounts.splice(list.indexOf(item), 1)" dnd-effect-allowed="move" dnd-selected="models.selected=item" ng-class="{ 'selected': models.selected===item}">
+                        <div class="inclDireListItem" item="{{item}}"></div>
+                    </li>
+                    <li ng-if="models.lists.fad_accounts==0" class="text-center">
+                        <h5><small><em>Great! All ad accounts assigned.</em></small></h5>
+                    </li>
+                </ul>
+            </div>
 
+        </div>
     </div>
 </div>

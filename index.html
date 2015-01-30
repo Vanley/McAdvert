@@ -22,13 +22,11 @@
 
 <body>
 
-    <div ng-app class="container" overflow="auto">
+    <div ng-app class="container" resize>
         <div ng-controller="mcAdvertControler as mcac" data-ng-init="init()">
 
-
-            window.height: {{windowHeight}}
-            <div class="well well-lg" id="well" ng-style="style()">
-                <!--            <div class="well well-lg" id="well" ng-style="style()" resize overflow="auto">-->
+            <!--            window.height: {{windowHeight}}-->
+            <div class="well well-lg nopaddingTop" ng-style="styleScrollHighOfWell()">
 
                 <div class="mcAdvert row">
                     <!--Include-->
@@ -36,20 +34,20 @@
 
                 </div>
 
-                <hr>
-                <!--Buttons-->
-                <div class="pull-right">
-                    <button ng-click="clearJsonData()" class="btn btn-success">
-                        Clear
-                    </button>
-                    <button ng-click="loadJsonData()" class="btn btn-warning">
-                        Reload
-                    </button>
-                </div>
-            </div>
+<!--
+      <hr> Buttons
+<div class="pull-right">
+    <button ng-click="clearJsonData()" class="btn btn-success">
+        Clear
+    </button>
+    <button ng-click="loadJsonData()" class="btn btn-warning">
+        Reload
+    </button>
+</div>
+</div>
+-->
             <!-- /Well -->
 
-            <hr>
             <!--
             <div class="bs-callout bs-callout-danger">
                 <p>{{ jsonData }}</p>

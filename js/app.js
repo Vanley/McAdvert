@@ -34,8 +34,25 @@ app.directive('resize', function ($window) {
 
             scope.style = function () {
                 return {
-                    'height': (newValue.h - 100) + 'px',
-                    'width': (newValue.w - 100) + 'px'
+                    'height': (newValue.h) + 'px',
+                    'width': (newValue.w) + 'px'
+                };
+            };
+            scope.styleScrollHighOfDiv = function () {
+                return {
+                    //                    'max-height': (newValue.h * 0.7) + 'px',
+                    'min-height': '300px',
+                    'height': (newValue.h - 40 - 240) + 'px',
+                    'overflow': 'auto'
+                };
+            };
+            scope.styleScrollHighOfWell = function () {
+                return {
+                    //   "max-height:800px; height:{{windowHeight-100}}px"
+                    //                    'max-height': (newValue.h * 0.9) + 'px',
+                    'min-height': '500px',
+                    'height': (newValue.h - 40) + 'px',
+                    'overflow': 'auto'
                 };
             };
         }, true);
